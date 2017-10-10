@@ -8,7 +8,8 @@ class TestGameOfLife(unittest.TestCase):
   @data(
     (['ooo', 'oxo', 'ooo'], 1, 1, 0), 
     (['ooo', 'oxo', 'ooo'], 0, 0, 1),
-    (['ooo', 'oxx', 'xxx'], 2, 2, 3)
+    (['ooo', 'oxx', 'xxx'], 2, 2, 3),
+    (['ooo', 'xxx', 'ooo'], 2, 0, 2)
   )
   @unpack
   def test_count_live_neighbors_works(self, board, x, y, expected_neighbors):
@@ -53,6 +54,15 @@ class TestGameOfLife(unittest.TestCase):
   @unpack
   def test_new_status_works(self, cell, number_of_neighbors, expected_new_status):
     self.assertEqual(new_status(cell, number_of_neighbors), expected_new_status)
+
+  @data(
+    ('oooooxxooxxooooo', 'oooooxxooxxooooo', 4),
+    ('oooxxxooo', 'oxooxooxo', 3),
+  )
+  @unpack
+  def test_update_board_works(self, input_board, expected_board, board_size):
+    board = [list(input_board[i:i+board_size]) for i in range(0, len(input_board), board_size)]
+    self.assertEqual(''.join([''.join(row) for row in update_board(board)]), expected_board)
  
 if __name__ == '__main__':
     unittest.main()
