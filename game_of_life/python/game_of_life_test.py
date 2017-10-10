@@ -6,10 +6,10 @@ from game_of_life import *
 class TestGameOfLife(unittest.TestCase):
 
   @data(
-    (['ooo', 'oxo', 'ooo'], 1, 1, 0), 
-    (['ooo', 'oxo', 'ooo'], 0, 0, 1),
-    (['ooo', 'oxx', 'xxx'], 2, 2, 3),
-    (['ooo', 'xxx', 'ooo'], 2, 0, 2)
+    (['   ', ' x ', '   '], 1, 1, 0), 
+    (['   ', ' x ', '   '], 0, 0, 1),
+    (['   ', ' xx', 'xxx'], 2, 2, 3),
+    (['   ', 'xxx', '   '], 2, 0, 2)
   )
   @unpack
   def test_count_live_neighbors_works(self, board, x, y, expected_neighbors):
@@ -56,8 +56,8 @@ class TestGameOfLife(unittest.TestCase):
     self.assertEqual(new_status(cell, number_of_neighbors), expected_new_status)
 
   @data(
-    ('oooooxxooxxooooo', 'oooooxxooxxooooo', 4),
-    ('oooxxxooo', 'oxooxooxo', 3),
+    ('     xx  xx     ', '     xx  xx     ', 4),
+    ('   xxx   ', ' x  x  x ', 3),
   )
   @unpack
   def test_update_board_works(self, input_board, expected_board, board_size):
