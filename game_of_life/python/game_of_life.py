@@ -66,10 +66,12 @@ def print_board(stdscr, board, iteration):
 
 def main(stdscr):
   board = list(list(row) for row in BOARD)
-  for i in range(1, 10):
+  i = 0
+  while True:
     print_board(stdscr, board, i)
     time.sleep(1)
     board = update_board(board)
+    i += 1
 
 
 if __name__ == '__main__':
